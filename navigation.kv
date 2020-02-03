@@ -1,0 +1,365 @@
+#: import Label kivy.uix.label
+
+MainWindow:
+
+<MainWindow>:
+    padding: 5
+    spacing: 10
+    orientation: 'vertical'
+    mmi_id: mmi_img
+    google_id: google_img
+    here_id: here_img
+    lat_: lat
+    lon_: lon
+    mmi_dtls: mmi_dtl
+    google_dtls: google_dtl
+    here_dtls: here_dtl
+    csv_path: csv_dir
+    comment: comment_box
+    mmi_gogl: mmi_google
+    mmi_google_: mmi_google_p
+    here_gogl: here_google
+    here_google_: here_google_p
+    mmi_hre: mmi_here
+    here_mmi_: here_mmi_p
+
+
+
+    BoxLayout:
+        height: '60dp'
+        size_hint_y: None
+        BoxLayout:
+            spacing: 2
+            size_hint_x: 0.8
+            orientation: 'vertical'
+            TextInput:
+                id: csv_dir
+                hint_text: 'Enter full directory of .csv file'
+            BoxLayout:
+                TextInput:
+                    id: license_key
+                    hint_text: 'license_key(mmi)'
+                TextInput:
+                    id: api_key
+                    hint_text: 'api_key(google)'
+                TextInput:
+                    id: here_id
+                    hint_text: 'app_id(here)'
+                TextInput:
+                    id: here_code
+                    hint_text: 'app_code(here)'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.2
+            Button:
+                text: 'Load csv'
+                on_press: root.load_csv()
+            Button:
+                text: 'Load Cred.'
+    BoxLayout:
+        orientation: 'horizontal'
+        height: '15dp'
+        size_hint_y: None
+        Label:
+            text: 'Map My India'
+            color: 0,0,0,1
+            font_size: '13sp'
+        Label:
+            text: 'Google Map'
+            color: 0,0,0,1
+            font_size: '13sp'
+        Label:
+            text: 'Here Map'
+            color: 0,0,0,1
+            font_size: '13sp'
+    BoxLayout:
+        height: '480dp'
+        size_hint_y: None
+        orientation: 'horizontal'
+        spacing: 5
+        AsyncImage:
+            id: mmi_img
+            allow_stretch: True
+            keep_ratio: False
+            size_hint_x: 6
+            source: "C:\\Users\\298115\\PycharmProjects\\MapCheck\\images\\mmi.jpg"
+
+        BoxLayout:
+            size_hint_x: 1
+            orientation: 'vertical'
+            spacing: 20
+            Button:
+                text: '+'
+                on_press: root.mmi_zoom(1)
+            Button:
+                text: '-'
+                on_press: root.mmi_zoom(0)
+
+        AsyncImage:
+            id: google_img
+            allow_stretch: True
+            keep_ratio: False
+            size_hint_x: 6
+            source: "C:\\Users\\298115\\PycharmProjects\\MapCheck\\images\\google_map.jpg"
+        BoxLayout:
+            size_hint_x: 1
+            orientation: 'vertical'
+            spacing: 20
+            Button:
+                text: '+'
+                on_press: root.google_zoom(1)
+            Button:
+                text: '-'
+                on_press: root.google_zoom(0)
+
+
+        AsyncImage:
+            id: here_img
+            allow_stretch: True
+            keep_ratio: False
+            size_hint_x: 6
+            source: "C:\\Users\\298115\\PycharmProjects\\MapCheck\\images\\here.jpg"
+        BoxLayout:
+            size_hint_x: 1
+            orientation: 'vertical'
+            spacing: 20
+            Button:
+                text: '+'
+                on_press: root.here_zoom(1)
+            Button:
+                text: '-'
+                on_press: root.here_zoom(0)
+
+    BoxLayout:
+        spacing: 10
+        orientation: 'horizontal'
+        height: '30dp'
+        size_hint_y: None
+        Label:
+        Label:
+            text: 'Latitude'
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 0, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+            id: lat
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+            text: 'Longitude'
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 0, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+            id: lon
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 10
+        height: '70dp'
+        size_hint_y: None
+        Label:
+            id: mmi_dtl
+            text_size: self.size
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+            id: google_dtl
+            text_size: self.size
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Label:
+            id: here_dtl
+            text_size: self.size
+            color: 0,0,0,1
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+    BoxLayout:
+        orientation: 'horizontal'
+        height: '170dp'
+        size_hint_y: None
+        padding: 5
+        BoxLayout:
+            size_hint_x: 0.3
+            orientation: 'vertical'
+            spacing: 2
+            BoxLayout:
+                Label:
+                    text: 'MMI & Google'
+                    font_size: '12sp'
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 0.5
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                Label:
+                    id: mmi_google
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+            Label:
+                id: mmi_google_p
+                color: 0,0,0,1
+                font_size: '11sp'
+                text_size: self.size
+                canvas.before:
+                    Color:
+                        rgb: 1, 1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            BoxLayout:
+                Label:
+                    text: 'HERE & Google'
+                    font_size: '12sp'
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 0.5
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                Label:
+                    id: here_google
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+            Label:
+                id: here_google_p
+                color: 0,0,0,1
+                font_size: '11sp'
+                text_size: self.size
+                canvas.before:
+                    Color:
+                        rgb: 1, 1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            BoxLayout:
+                Label:
+                    text: 'MMI & HERE'
+                    font_size: '12sp'
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 0.5
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                Label:
+                    id: mmi_here
+                    color: 0,0,0,1
+                    canvas.before:
+                        Color:
+                            rgb: 1, 1, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+            Label:
+                id: here_mmi_p
+                color: 0,0,0,1
+                font_size: '11sp'
+                text_size: self.size
+                canvas.before:
+                    Color:
+                        rgb: 1, 1, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+        Label:
+            size_hint_x: 0.1
+        BoxLayout:
+            spacing: 5
+            Button:
+                text: 'Correct & Next(G)'
+                background_color: 0,1,0,0.8
+                on_press: root.next('G')
+            Button:
+                text: 'Wrong & Next(NG)'
+                background_color: 1,0,0,0.8
+                on_press: root.next('NG')
+            Button:
+                text: 'Next(NaN)'
+                background_color: 0.8,0.6,0,0.8
+                on_press: root.next('NaN')
+            Button:
+                text: 'Automate (with map)'
+                on_press: root.automate_wm()
+            Button:
+                text: 'Automate (without map)'
+                on_press: root.automate_wtm()
+            Button:
+                text: 'Stop'
+                on_press: root.stop()
+
+
+
+    BoxLayout:
+        orientation: 'horizontal'
+        Label:
+            size_hint_x: 0.7
+            id: comment_box
+            color: 1,0,0,1
+            text: 'welcome!'
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Button:
+            size_hint_x: 0.3
+            text: 'generate report'
+            on_press: root.gen_rep()
+
+
+
+
